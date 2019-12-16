@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BlogPostService } from '../services/blog-post.service';
 import { BlogPost } from '../models/blogpost';
+import { share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-blog-posts',
@@ -19,7 +20,7 @@ export class BlogPostsComponent implements OnInit {
   }
 
   loadBlogPosts() {
-    this.blogPosts$ = this.blogPostService.getBlogPosts();
+    this.blogPosts$ = this.blogPostService.getBlogPosts().pipe(share());
   }
 
   delete(postId) {
